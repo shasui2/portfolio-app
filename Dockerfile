@@ -1,4 +1,4 @@
-FROM ruby:2.5
+FROM ruby:2.5.0
 
 WORKDIR /usr/src/app
 
@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["/bin/bash", "rails s"]
+CMD ["rails", "s"]
