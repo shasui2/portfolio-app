@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY Gemfile Gemfile.lock ./
 
-RUN gem install libv8 -- --with-system-v8
+RUN gem install libv8 -v 3.16.14.19 -- --with-system-v8
 
 RUN bundle install
 
