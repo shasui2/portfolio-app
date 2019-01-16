@@ -8,4 +8,3 @@
 - Blog
 - Portfolio
 - Drag and drop interface
-- Webhook test
