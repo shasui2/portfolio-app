@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8863da3-9f8e-43f9-a2b6-86f6fe3e734e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change beforePath="$PROJECT_DIR$/.idea/portfolio-app.iml" afterPath="$PROJECT_DIR$/.idea/portfolio-app.iml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/.ruby-version" afterPath="$PROJECT_DIR$/.ruby-version" />
-      <change beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -274,12 +269,12 @@
       <updated>1547476447578</updated>
       <workItem from="1547476448976" duration="8356000" />
       <workItem from="1547733721166" duration="1387000" />
-      <workItem from="1547747270278" duration="1752000" />
+      <workItem from="1547747270278" duration="2241000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11495000" />
+    <option name="totallyTimeSpent" value="11984000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1927" y="0" width="974" height="1057" extended-state="0" />
