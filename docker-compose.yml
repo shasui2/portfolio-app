@@ -1,0 +1,19 @@
+version: '2'
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+
+  app:
+    build: .
+    # image: shasui2/portfolio-app:latest
+    command: rails s
+    ports:
+      - "3000:3000"
+    links:
+      - db
+    volumes:
+      - .:/myapp
+    depends_on:
+      - db
