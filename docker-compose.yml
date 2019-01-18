@@ -1,19 +1,16 @@
-version: '2'
+version: '3'
 services:
   db:
-    image: mysql:latest
+    image: mysql:5.7
     ports:
       - "3306:3306"
-
-  app:
-    build: .
-    # image: shasui2/portfolio-app:latest
-    command: rails s
+  web:
+    # build: .
+    image: shasui2/portfolio-app:latest
+    command: bin/rails server -p 3000 -b '0.0.0.0' # this is redundant as it the container's default command
+    volumes:
+      - .:/app
     ports:
       - "3000:3000"
-    links:
-      - db
-    volumes:
-      - .:/myapp
     depends_on:
       - db
