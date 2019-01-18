@@ -3,15 +3,15 @@ services:
   db:
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
   web:
     # build: .
     image: shasui2/portfolio-app:latest
-    command: bin/rails server -p 3000 -b '0.0.0.0' # this is redundant as it the container's default command
-    volumes:
-      - .:/app
+    command: bin/rails server -p 3000 -b '0.0.0.0'
+    # volumes:
+    #  - .:/app
     ports:
       - "3000:3000"
     depends_on:
