@@ -22,6 +22,9 @@ module PortfolioApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    #https://stackoverflow.com/questions/29417328/how-to-disable-cannot-render-console-from-on-rails
+    config.web_console.whiny_requests = false
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

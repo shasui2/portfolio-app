@@ -3,16 +3,23 @@ services:
   db:
     image: mysql:5.7
     environment:
+      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "3306:3306"
+    expose:
+      - '3306'
+    restart: always
+    volumes:
+      - /var/lib/mysql
   web:
     # build: .
     image: shasui2/portfolio-app:latest
-    command: bin/rails server -p 3000 -b '0.0.0.0'
-    # volumes:
-    #  - .:/app
+    command: rails s -p 3000 -b '0.0.0.0'
+    volumes:
+     - .:/app
     ports:
       - "3000:3000"
     depends_on:
       - db
+    restart: always
