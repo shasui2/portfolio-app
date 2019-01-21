@@ -9,7 +9,7 @@ pipeline {
                 script {
                     app = docker.build("shasui2/portfolio-app")
                     app.inside {
-                        bat 'sh echo $(curl localhost:8080)'
+                        sh 'echo $(curl localhost:8080)'
                     }
                 }
             }
@@ -39,12 +39,12 @@ pipeline {
                     script {
                         bat "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}\""
                         try {
-                            bat "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop portfolio-app\""
-                            bat "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm portfolio-app \""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop portfolio-app\""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm portfolio-app \""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        bat "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name portfolio-app -p 3000:3000 -d shasui2/portfolio-app:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name portfolio-app -p 3000:3000 -d shasui2/portfolio-app:${env.BUILD_NUMBER}\""
                     }
                 }
             }
