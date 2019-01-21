@@ -9,7 +9,7 @@ pipeline {
                 script {
                     app = docker.build("shasui2/portfolio-app")
                     app.inside {
-                        bat 'echo $(curl localhost:8080)'
+                        bat 'sh echo $(curl localhost:8080)'
                     }
                 }
             }
