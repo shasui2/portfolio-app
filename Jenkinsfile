@@ -8,9 +8,6 @@ pipeline {
             steps {
                 script {
                     app = docker.build("shasui2/portfolio-app")
-                    app.inside {
-                        sh 'echo $(curl -u jamie:117794afc0b5870356d9066f44d7c39453 localhost:8080)'
-                    }
                 }
             }
         }
