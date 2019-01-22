@@ -9,7 +9,7 @@ pipeline {
                 script {
                     app = docker.build("shasui2/portfolio-app")
                     app.inside {
-                        sh 'echo $(curl localhost:8080)'
+                        sh 'echo $(curl -u jamie:117794afc0b5870356d9066f44d7c39453 localhost:8080)'
                     }
                 }
             }
@@ -27,7 +27,6 @@ pipeline {
                 }
             }
         }
-        /*
         stage('DeployToProduction') {
             when {
                 branch 'master'
@@ -37,17 +36,15 @@ pipeline {
                 milestone(1)
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
                     script {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}\""
                         try {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker stop portfolio-app\""
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm portfolio-app \""
+                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker-compose down\""
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name portfolio-app -p 3000:3000 -d shasui2/portfolio-app:${env.BUILD_NUMBER}\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker-compose up -d\""
                     }
                 }
             }
-        } */
+        }
     }
 }
