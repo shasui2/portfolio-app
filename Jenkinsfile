@@ -32,28 +32,28 @@ pipeline {
             when {
                 branch 'master'
             }
-            if (isUnix()) {
-                steps {
-                    input 'Deploy to Production?'
-                    milestone(1)
-                        withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', usernameVariable: 'userName')]) {
-                            script {
-                                remote.user = userName
-                                remote.identityFile = identity
-                                sshCommand remote: remote, command: "docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}"
-                                try {
-                                    sshCommand remote: remote, command: "docker stop portfolio-app"
-                                    sshCommand remote: remote, command: "docker rm portfolio-app"
-                                } catch (err) {
-                                    echo: 'caught error: $err'
-                                }
-                                sshCommand remote: remote, command: "docker run --name portfolio-app -p 80:3000 -d --network portfolio shasui2/portfolio-app:${env.BUILD_NUMBER}"
+            steps {
+                input 'Deploy to Production?'
+                milestone(1)
+                withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', usernameVariable: 'userName')]) {
+                    script {
+                        if (isUnix()) {
+                            remote.user = userName
+                            remote.identityFile = identity
+                            sshCommand remote: remote, command: "docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}"
+                            try {
+                                sshCommand remote: remote, command: "docker stop portfolio-app"
+                                sshCommand remote: remote, command: "docker rm portfolio-app"
+                            } catch (err) {
+                                echo: 'caught error: $err'
                             }
+                            sshCommand remote: remote, command: "docker run --name portfolio-app -p 80:3000 -d --network portfolio shasui2/portfolio-app:${env.BUILD_NUMBER}"
                         }
+                        else {
+                            bat 'echo You are on Windows!'
+                        }
+                    }
                 }
-            }
-            else {
-                bat 'echo You are on Windows!'
             }
         }
     }
