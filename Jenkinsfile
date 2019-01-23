@@ -41,11 +41,12 @@ pipeline {
                         remote.identityFile = identity
                         sshCommand remote: remote, command: "docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}"
                         try {
-                            sshCommand remote: remote, command: "docker-compose down"
+                            sshCommand remote: remote, command: "docker stop portfolio-app"
+                            sshCommand remote: remote, command: "docker rm portfolio-app"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sshCommand remote: remote, command: "docker-compose up -d"
+                        sshCommand remote: remote, command: "docker run --name portfolio-app -p 3000:3000 -d --network portfolio shasui2/portfolio-app:${env.BUILD_NUMBER}"
                     }
                 }
             }
