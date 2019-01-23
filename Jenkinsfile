@@ -31,15 +31,21 @@ pipeline {
             steps {
                 input 'Deploy to Production?'
                 milestone(1)
-                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                def remote = [:]
+                remote.name = 'prod'
+                remote.host = '172.31.29.212'
+                remote.allowAnyHosts = true
+                withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', usernameVariable: 'userName')]) {
+                    remote.user = userName
+                    remote.identityFile = identity
                     script {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}\""
+                        sshCommand remote: remote, command: "docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}"
                         try {
-                            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker-compose down\""
+                            sshCommand remote: remote, command: "docker-compose down"
                         } catch (err) {
                             echo: 'caught error: $err'
                         }
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker-compose up -d\""
+                        sshCommand remote: remote, command: "docker-compose up -d"
                     }
                 }
             }
