@@ -52,7 +52,7 @@ pipeline {
                     }
                 }
                 else {
-                    bat 'echo You're on Windows!'
+                    bat 'echo You are on Windows!'
                 }
             }
         }
