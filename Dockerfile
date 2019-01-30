@@ -5,11 +5,12 @@ WORKDIR /usr/src/app
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash -
 RUN apt-get install -y nodejs
 
-COPY Gemfile ./
+COPY Gemfile Gemfile.lock ./
 
 RUN apt-get update
 RUN gem install bundler
-RUN bundle update
+RUN apt-get install libxslt-dev libxml2-dev libxml2 libgmp-dev -y
+RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle
 
 COPY . .
