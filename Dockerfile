@@ -7,7 +7,7 @@ RUN apt-get install -y nodejs
 
 COPY Gemfile Gemfile.lock ./
 
-RUN apt-get install libxml2-dev libxslt-dev
+RUN rvm requirements
 RUN bundle install
 
 COPY . .
