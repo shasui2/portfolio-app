@@ -10,8 +10,7 @@ COPY Gemfile Gemfile.lock ./
 RUN apt-get update
 RUN gem install bundler
 RUN apt-get install libxslt-dev libxml2-dev libxml2
-RUN apt-get install build-essential patch -ygit add .
-git a
+RUN apt-get install build-essential patch -y
 RUN gem install nokogiri -- --use-system-libraries=true --with-xml2-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include/libxml2
 RUN bundle update
 RUN bundle
