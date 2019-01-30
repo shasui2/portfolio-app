@@ -45,7 +45,7 @@ pipeline {
                                 sshCommand remote: remote, command: "docker-compose down"
                                 sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
                                 sshCommand remote: remote, command: "docker-compose up -d"
-                                sshCommand remote: remote, command: "docker-compose run --rm web cd /usr/src/app && ./wait-for-it/wait-for-it.sh mysql:3306 -- rake db:setup"
+                                sshCommand remote: remote, command: "docker-compose run --rm web cd /usr/src/app && ./wait-for-it/wait-for-it.sh db:3306 -- rake db:setup"
                             } catch (err) {
                                 echo: 'caught error: $err'
                             }
