@@ -9,7 +9,6 @@ COPY Gemfile Gemfile.lock ./
 
 RUN apt-get update
 RUN gem install bundler
-RUN apt-get install libxslt-dev libxml2-dev libxml2 libgmp-dev -y
 RUN bundle update
 RUN bundle
 
