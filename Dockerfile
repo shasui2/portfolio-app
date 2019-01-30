@@ -7,7 +7,7 @@ RUN apt-get install -y nodejs
 
 COPY Gemfile Gemfile.lock ./
 
-RUN gem install nokogiri -- --use-system-libraries
+RUN apt-get install libxml2-dev libxslt-dev
 RUN bundle install
 
 COPY . .
