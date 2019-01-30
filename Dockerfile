@@ -7,6 +7,8 @@ RUN apt-get install -y nodejs
 
 COPY Gemfile Gemfile.lock ./
 
+RUN xcode-select --install
+RUN gem install nokogiri
 RUN bundle install
 
 COPY . .
