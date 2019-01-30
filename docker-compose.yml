@@ -12,6 +12,7 @@ services:
     restart: always
     volumes:
       - /var/lib/mysql
+
   web:
     # build: .
     image: shasui2/portfolio-app:latest

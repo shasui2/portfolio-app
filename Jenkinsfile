@@ -44,11 +44,11 @@ pipeline {
                             try {
                                 sshCommand remote: remote, command: "docker-compose down"
                                 sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
+                                sshCommand remote: remote, command: "docker-compose up -d"
+                                sshCommand remote: remote, command: "docker-compose run --rm web ./wait-for-it/wait-for-it.sh mysql:3306 -- rake db:setup"
                             } catch (err) {
                                 echo: 'caught error: $err'
                             }
-                            sshCommand remote: remote, command: "docker-compose up -d"
-                            sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
                             sshCommand remote: remote, command: "docker system prune -a -f"
                         }
                         else {

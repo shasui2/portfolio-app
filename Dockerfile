@@ -13,6 +13,8 @@ RUN apt-get install libxslt-dev libxml2-dev libxml2 libgmp-dev -y
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle
 
+RUN git clone https://github.com/vishnubob/wait-for-it.git
+
 COPY . .
 
 EXPOSE 3000
