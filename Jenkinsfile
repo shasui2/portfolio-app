@@ -51,7 +51,7 @@ pipeline {
                                 echo: 'caught error: $err'
                             }
                             sshCommand remote: remote, command: "docker system prune"
-                        }docker
+                        }
                         else {
                             bat 'echo You are on Windows!'
                         }
@@ -61,23 +61,3 @@ pipeline {
         }
     }
 }
-
-
-/*
-Test Kubernetes deployment.
-
-stage('DeployToProduction') {
-            when {
-                branch 'master'
-            }
-            steps {
-                input 'Deploy to Production?'
-                milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'kube-deploy.yml',
-                    enableConfigSubstitution: true
-                )
-            }
-        }
-*/
