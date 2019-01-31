@@ -11,6 +11,8 @@ RUN apt-get update
 RUN apt-get install netcat netcat-openbsd -y
 RUN gem install bundler
 RUN apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev -y
+RUN bundle config build.nokogiri --use-system-libraries
+RUN gem install nokogiri
 RUN bundle
 
 COPY . .
