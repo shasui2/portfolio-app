@@ -44,13 +44,14 @@ pipeline {
                             try {
                                 sshCommand remote: remote, command: "docker-compose down"
                                 sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
-                                sshCommand remote: remote, command: "docker-compose up -d"
+                                sshCommand remote: remote, command: "docker-compose run start_dependencies"
                                 sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
+                                sshCommand remote: remote, command: "docker-compose run web"
                             } catch (err) {
                                 echo: 'caught error: $err'
                             }
-                            sshCommand remote: remote, command: "docker system prune -a -f"
-                        }
+                            sshCommand remote: remote, command: "docker system prune"
+                        }docker
                         else {
                             bat 'echo You are on Windows!'
                         }
