@@ -48,7 +48,7 @@ pipeline {
                             }
                             sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
                             sshCommand remote: remote, command: "docker-compose run start_dependencies"
-                            sshCommand remote: remote, command: "docker-compose run web -d"
+                            sshCommand remote: remote, command: "docker-compose run -d web"
                             sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
                             sshCommand remote: remote, command: "docker system prune -a -f"
                             sshCommand remote: remote, command: "docker ps > echo"
