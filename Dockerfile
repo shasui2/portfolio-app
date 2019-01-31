@@ -8,12 +8,11 @@ RUN apt-get install -y nodejs
 COPY Gemfile Gemfile.lock ./
 
 RUN apt-get update
+RUN apt install netcat
 RUN gem install bundler
 RUN apt-get install libxslt-dev libxml2-dev libxml2 libgmp-dev -y
 RUN bundle config build.nokogiri --use-system-libraries
 RUN bundle
-
-RUN git clone https://github.com/vishnubob/wait-for-it.git
 
 COPY . .
 

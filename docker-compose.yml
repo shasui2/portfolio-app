@@ -24,3 +24,21 @@ services:
     depends_on:
       - db
     restart: always
+
+  start_dependencies:
+    image: shasui2/portfolio-app:latest
+    depends_on:
+      - db
+    command: >
+      /bin/bash -c "
+        done=0
+        while ! nc -z db 3306;
+        do
+          echo sleeping;
+          sleep 1;
+          if [ "$done" == 10 ]; then
+                break
+            fi
+        done;
+        echo Connected!;
+      "
