@@ -43,13 +43,13 @@ pipeline {
                             sshCommand remote: remote, command: "docker pull shasui2/portfolio-app:${env.BUILD_NUMBER}"
                             try {
                                 sshCommand remote: remote, command: "docker-compose down"
-                                sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
-                                sshCommand remote: remote, command: "docker-compose run start_dependencies"
-                                sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
-                                sshCommand remote: remote, command: "docker-compose run web"
                             } catch (err) {
                                 echo: 'caught error: $err'
                             }
+                            sshCommand remote: remote, command: "git fetch && git checkout FETCH_HEAD -- docker-compose.yml"
+                            sshCommand remote: remote, command: "docker-compose run start_dependencies"
+                            sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
+                            sshCommand remote: remote, command: "docker-compose run web"
                             sshCommand remote: remote, command: "docker system prune -a -f"
                         }
                         else {
