@@ -50,7 +50,7 @@ pipeline {
                             } catch (err) {
                                 echo: 'caught error: $err'
                             }
-                            sshCommand remote: remote, command: "docker system prune"
+                            sshCommand remote: remote, command: "docker system prune -a -f"
                         }
                         else {
                             bat 'echo You are on Windows!'
