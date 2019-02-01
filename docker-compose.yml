@@ -14,8 +14,8 @@ services:
       - /var/lib/mysql
 
   web:
-    # build: .
-    image: shasui2/portfolio-app:latest
+    build: .
+    # image: shasui2/portfolio-app:latest
     command: rails s -p 3000 -b '0.0.0.0'
     volumes:
      - .:/app
@@ -26,8 +26,8 @@ services:
     restart: always
 
   start_dependencies:
-    # build: .
-    image: shasui2/portfolio-app:latest
+    build: .
+    # image: shasui2/portfolio-app:latest
     depends_on:
       - db
     command: >

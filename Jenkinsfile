@@ -61,3 +61,8 @@ pipeline {
         }
     }
 }
+
+/*
+    I am using docker-compose rather than Kubernetes as the t2.micros only have 1GB of memory.
+    Start dependencies will wait until the database is ready before proceeding so that migrations run successfully.
+*/

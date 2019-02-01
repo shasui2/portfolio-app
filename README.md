@@ -25,3 +25,15 @@ To practice CI/CD processes and deploying to live environments.
 4. Create Kubernetes deployment for fault tolerant applications.
 5. Create Terraform and Ansible deployments for Jenkins and Prod servers.
 6. Develop Portfolio App.
+
+### Code Example
+
+```ruby
+def my_great_method
+  puts "here it is"
+end
+```
+
+```javascript
+alert('Hi there');
+```
