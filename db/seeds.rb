@@ -6,6 +6,32 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times do |blog|
-
+5.times do |blog|
+  Blog.create!(
+    title: "Blog Post No.#{blog}",
+    body: "This is a blog post."
+  )
 end
+
+puts "5 Blogs created."
+
+5.times do |skill|
+  Skill.create!(
+    title: "Rails #{skill}",
+    percent_utilised: 15
+  )
+end
+
+puts "5 Skills created."
+
+9.times do |portfolio|
+  Portfolio.create!(
+    title: "Portfolio #{portfolio}",
+    subtitle: "My great service",
+    body: "Some random body",
+    main_image: "https://via.placeholder.com/600x400",
+    thumb_image: "https://via.placeholder.com/350x200"
+  )
+end
+
+puts "9 Portfolios created."
