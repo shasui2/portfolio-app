@@ -13,6 +13,7 @@ RUN gem install bundler
 RUN apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev libgmp3-dev libxslt-dev libxml2-dev libxml2 -y
 RUN bundle config build.nokogiri --use-system-libraries
 RUN gem install nokogiri
+RUN gem install nio4r
 RUN bundle update
 
 COPY . .
