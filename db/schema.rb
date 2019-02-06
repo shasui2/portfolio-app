@@ -10,29 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_14_154502) do
+ActiveRecord::Schema.define(version: 2019_02_06_130735) do
 
   create_table "blogs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
-  # create_table "portfolios", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-  #   t.string "title"
-  #   t.string "subtitle"
-  #   t.text "body"
-  #   t.text "main_image"
-  #   t.text "thumb_image"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
-  # end
-  #
-  # create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-  #   t.string "title"
-  #   t.integer "percent_utilised"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
-  # end
+  create_table "columns_priv", primary_key: ["Host", "Db", "User", "Table_name", "Column_name"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin", comment: "Column privileges", force: :cascade do |t|
+    t.string "Host", limit: 60, default: "", null: false
+    t.string "Db", limit: 64, default: "", null: false
+    t.string "User", limit: 32, default: "", null: false
+    t.string "Table_name", limit: 64, default: "", null: false
+    t.string "Column_name", limit: 64, default: "", null: false
+    t.timestamp "Timestamp", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.string "Column_priv", limit: 31, default: "", null: false, collation: "utf8_general_ci"
+  end
+
+  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "portfolios", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "title"
+    t.string "subtitle"
+    t.text "body"
+    t.text "main_image"
+    t.text "thumb_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "title"
+    t.integer "percent_utilised"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
