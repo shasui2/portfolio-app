@@ -50,6 +50,7 @@ pipeline {
                             sshCommand remote: remote, command: "docker-compose run start_dependencies"
                             sshCommand remote: remote, command: "docker-compose up -d web"
                             sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
+                            sshCommand remote: remote, command: "docker-compose run --rm web rake db:migrate"
                             sshCommand remote: remote, command: "docker system prune -a -f"
                         }
                         else {
@@ -61,3 +62,8 @@ pipeline {
         }
     }
 }
+
+/*
+    I am using docker-compose rather than Kubernetes as the t2.micros only have 1GB of memory.
+    Start dependencies will wait until the database is ready before proceeding so that migrations run successfully.
+*/
