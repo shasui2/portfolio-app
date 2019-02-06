@@ -51,7 +51,7 @@ pipeline {
                             sshCommand remote: remote, command: "docker-compose up -d web"
                             sshCommand remote: remote, command: "docker-compose run --rm web rake db:setup"
                             sshCommand remote: remote, command: "docker-compose run --rm web rake db:migrate"
-                            sshCommand remote: remote, command: "docker system prune"
+                            sshCommand remote: remote, command: "docker system prune -af"
                         }
                         else {
                             bat 'echo You are on Windows!'
