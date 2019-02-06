@@ -21,16 +21,6 @@ ActiveRecord::Schema.define(version: 2019_02_06_130735) do
     t.index ["slug"], name: "index_blogs_on_slug", unique: true
   end
 
-  create_table "columns_priv", primary_key: ["Host", "Db", "User", "Table_name", "Column_name"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin", comment: "Column privileges", force: :cascade do |t|
-    t.string "Host", limit: 60, default: "", null: false
-    t.string "Db", limit: 64, default: "", null: false
-    t.string "User", limit: 32, default: "", null: false
-    t.string "Table_name", limit: 64, default: "", null: false
-    t.string "Column_name", limit: 64, default: "", null: false
-    t.timestamp "Timestamp", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.string "Column_priv", limit: 31, default: "", null: false, collation: "utf8_general_ci"
-  end
-
   create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
