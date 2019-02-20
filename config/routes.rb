@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'pages/*missing', to: 'pages#missing'
+
   root to: 'pages#home'
 end
