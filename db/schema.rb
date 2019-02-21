@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_192613) do
+ActiveRecord::Schema.define(version: 2019_02_21_151929) do
 
   create_table "blogs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title"
@@ -269,6 +269,7 @@ ActiveRecord::Schema.define(version: 2019_02_20_192613) do
     t.integer "percent_utilised"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "badge"
   end
 
   create_table "slave_master_info", primary_key: "Channel_name", id: :string, limit: 64, comment: "The channel on which the slave is connected to a source. Used in Multisource Replication", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 STATS_PERSISTENT=0", comment: "Master Information", force: :cascade do |t|
