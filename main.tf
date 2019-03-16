@@ -1,7 +1,7 @@
 provider "aws" {
-  region                  = "eu-west-2"
+  region                  = "${var.aws_region}"
   shared_credentials_file = "${var.credentials}"
-  profile                 = "terraform"
+  profile                 = "${var.aws_profile}"
 }
 
 resource "aws_instance" "prod" {

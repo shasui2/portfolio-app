@@ -1,3 +1,7 @@
+variable "aws_region" {}
+
+variable "aws_profile" {}
+
 variable "credentials" {
   default = "/home/eon01/.aws/credentials"
 }
