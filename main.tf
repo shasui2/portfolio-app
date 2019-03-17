@@ -1,23 +1,51 @@
 provider "aws" {
   region                  = "${var.aws_region}"
-  shared_credentials_file = "${var.credentials}"
   profile                 = "${var.aws_profile}"
 }
 
-resource "aws_instance" "prod" {
-  ami = "${var.debian-ami}"
-  instance_type = "t2.micro"
-  tags {
-    Name = "prod"
-  }
+#---- IAM ----
+
+// S3 Access
+
+resource "aws_iam_instance_profile" "s3_access_profile" {
+  name = "s3_access"
+  role = "${aws_iam_role.s3_access_role.name}"
 }
 
-resource "aws_security_group" "prod-sg" {
-  name = "prod-sg"
-  ingress {
-    from_port = "${var.server_port}"
-    to_port = "${var.server_port}"
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "aws_iam_role_policy" "s3_access_policy" {
+  name = "s3_access_policy"
+  role = "${aws_iam_role.s3_access_role.id}"
+
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "*"
+    }
+    ]
+}
+EOF
+}
+
+resource "aws_iam_role" "s3_access_role" {
+  name = "s3_access_role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+  {
+    "Action": "sts:AssumeRole",
+    "Principle": {
+      "Service": "ec2.amazonaws.com"
+  },
+    "Effect": "Allow",
+    "Sid": ""
+    }
+  ]
+}
+EOF
 }
