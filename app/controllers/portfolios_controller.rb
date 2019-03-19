@@ -1,10 +1,18 @@
 class PortfoliosController < ApplicationController
   def index
     @portfolio_items = Portfolio.all
+
+    # @portfolio_items = Portfolio.angular
+    # @portfolio_items = Portfolio.ruby_on_rails_portfolio_items
+  end
+
+  def angular
+    @angular_portfolio_items = Portfolio.angular
   end
 
   def new
     @portfolio_item = Portfolio.new
+    3.times { @portfolio_item.technologies.build }
   end
 
   def create
@@ -50,6 +58,6 @@ class PortfoliosController < ApplicationController
 
   private
   def blog_params
-    params.require(:portfolio).permit(:title, :subtitle, :body)
+    params.require(:portfolio).permit(:title, :subtitle, :body, technologies_attributes: [:name])
   end
 end
