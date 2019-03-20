@@ -49,3 +49,91 @@ resource "aws_iam_role" "s3_access_role" {
 }
 EOF
 }
+
+#---- VPC ----
+
+resource "aws_vpc" "portfolio_vpc" {
+  cidr_block = "${var.vpc_cidr}"
+  enable_dns_hostnames = true
+  enable_dns_support = true
+
+  tags {
+    Name = "portfolio_vpc"
+  }
+}
+
+
+#---- Internet Gateway ----
+
+resource "aws_internet_gateway" "portfolio_internet_gateway" {
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+
+  tags {
+    Name = "portfolio_igw"
+  }
+}
+
+
+#---- Route Tables ----
+
+resource "aws_route_table" "portfolio_public_rt" {
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.portfolio_internet_gateway.id}"
+  }
+
+  tags {
+    Name = "portfolio_public"
+  }
+}
+
+resource "aws_default_route_table" "portfolio_private_rt" {
+  default_route_table_id = "${aws_vpc.portfolio_vpc.default_route_table_id}"
+
+  tags {
+    Name ="portfolio_private"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
