@@ -63,7 +63,7 @@ resource "aws_vpc" "portfolio_vpc" {
 }
 
 
-#---- Internet Gateway ----
+// Internet Gateway
 
 resource "aws_internet_gateway" "portfolio_internet_gateway" {
   vpc_id = "${aws_vpc.portfolio_vpc.id}"
@@ -74,7 +74,7 @@ resource "aws_internet_gateway" "portfolio_internet_gateway" {
 }
 
 
-#---- Route Tables ----
+// Route Tables
 
 resource "aws_route_table" "portfolio_public_rt" {
   vpc_id = "${aws_vpc.portfolio_vpc.id}"
@@ -96,6 +96,30 @@ resource "aws_default_route_table" "portfolio_private_rt" {
   }
 }
 
+
+// Subnets
+
+resource "aws_subnet" "portfolio_public1_subnet" {
+  cidr_block = "${var.cidrs["public1"]}"
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+  map_public_ip_on_launch = true
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+
+  tags {
+    Name = "portfolio_public1"
+  }
+}
+
+resource "aws_subnet" "portfolio_private1_subnet" {
+  cidr_block = "${var.cidrs["private1"]}"
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+  map_public_ip_on_launch = false
+  availability_zone = "${data.aws_availability_zones.available.names[0]}"
+
+  tags {
+    Name = "portfolio_private1"
+  }
+}
 
 
 
