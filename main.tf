@@ -130,3 +130,112 @@ resource "aws_route_table_association" "portfolio_private1_assoc" {
   route_table_id = "${aws_default_route_table.portfolio_private_rt.id}"
   subnet_id      = "${aws_subnet.portfolio_private1_subnet.id }"
 }
+
+// Security Groups
+
+
+resource "aws_security_group" "portfolio_dev_sg" {
+  name = "portfolio_dev_sg"
+  description = "Used for access to the dev instance"
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+
+
+  # ssh
+  ingress {
+    from_port = 22
+    protocol = "tcp"
+    to_port = 22
+    cidr_blocks = ["${var.localip}"]
+  }
+
+  # http
+  ingress {
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
+    cidr_blocks = ["${var.localip}"]
+  }
+
+  egress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "portfolio_public_sg" {
+  name = "portfolio_public_sg"
+  description = "Used for the elastic load balancer for public access."
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+
+  # http
+  ingress {
+    from_port = 80
+    protocol = "tcp"
+    to_port = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "portfolio_private_sg" {
+  name = "portfolio_private_sg"
+  description = "Used for private instances"
+  vpc_id = "${aws_vpc.portfolio_vpc.id}"
+
+  # access from vpc
+  ingress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["${var.vpc_cidr}"]
+  }
+
+  egress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
