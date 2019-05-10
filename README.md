@@ -23,7 +23,7 @@ To practice CI/CD processes and deploying to live environments.
 2. ~~Create Docker image of app to deploy.~~
 3. ~~Automate build and deployments via master branch webhooks.~~
 4. Create Kubernetes deployment for fault tolerant applications.
-5. Create Terraform and Ansible deployments for Jenkins and Prod servers.
+5. Create Terraform and Ansible deployments for Jenkins and Prod servers.[In Progress]
 6. Develop Portfolio App.
 
 ### Code Example
