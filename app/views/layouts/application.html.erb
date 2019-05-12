@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PortfolioApp</title>
+    <title><%= @page_title %></title>
     <%= csrf_meta_tags %>
+    <meta name="keywords" content="<%= @seo_keywords %>"/>
     <%= csp_meta_tag %>
     <%= favicon_link_tag asset_path('favicon-32x32.png') %>
 
@@ -14,13 +15,12 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if current_user %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Register", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
-    <% end %>
+    <%= render "shared/nav", location: 'top' %>
+
+    <%= login_helper %>
 
     <%= yield %>
+
+    <%= source_helper("application") %>
   </body>
 </html>
