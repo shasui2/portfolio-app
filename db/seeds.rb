@@ -62,3 +62,7 @@ puts "9 Portfolios created."
 end
 
 puts "3 Technologies created."
+
+1.times do | user |
+  User.first.update!(roles: "site_admin")
+end
