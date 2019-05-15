@@ -3,8 +3,8 @@
   <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
       <h1 class="display-4 font-italic"><%= @blogs.first.title %></h1>
-      <p class="lead my-3"><%= @blogs.first.body.truncate(50) %></p>
-      <p class="lead mb-0"><%= link_to @blogs.first.title, @blogs.first %></p>
+      <p class="lead my-3"><%= @blogs.first.body.truncate(150, separator: ' ') %></p>
+      <p class="lead mb-0"><%= link_to "Continue reading...", @blogs.first %></p>
     </div>
   </div>
 </div>

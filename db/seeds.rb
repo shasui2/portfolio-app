@@ -13,15 +13,20 @@ end
 
 puts "2 topics created."
 
-5.times do |blog|
+15.times do |blog|
   Blog.create!(
       title: "Blog Post No.#{blog}",
-      body: "This is a blog post.",
+      body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."\
+            "Rhoncus est pellentesque elit ullamcorper. Sed adipiscing diam donec adipiscing tristique risus nec. Habitant morbi tristique senectus et netus."\
+            "Est sit amet facilisis magna etiam tempor orci eu. Sociis natoque penatibus et magnis dis parturient."\
+            "Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Ac tortor dignissim convallis aenean et tortor. Massa eget egestas purus viverra accumsan."\
+            "Nunc eget lorem dolor sed viverra ipsum nunc. Quisque non tellus orci ac auctor augue. Tortor posuere ac ut consequat semper viverra nam libero."\
+            "Vitae semper quis lectus nulla at volutpat. Ut pharetra sit amet aliquam id diam.",
       topic_id: Topic.last.id
   )
 end
 
-puts "5 Blogs created."
+puts "15 Blogs created."
 
 5.times do |skill|
   Skill.create!(
@@ -63,6 +68,6 @@ end
 
 puts "3 Technologies created."
 
-1.times do | user |
+1.times do |user|
   User.first.update!(roles: "site_admin")
 end
