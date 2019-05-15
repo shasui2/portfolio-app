@@ -6,7 +6,8 @@ class BlogsController < ApplicationController
                          :new,
                          :create,
                          :update,
-                         :edit]},
+                         :edit,
+                         :toggle_status]},
          site_admin: :all
 
   # GET /blogs
