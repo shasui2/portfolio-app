@@ -11,6 +11,10 @@ class Portfolio < ApplicationRecord
     where(subtitle: 'Angular')
   end
 
+  def self.order_by_position
+    order("position ASC")
+  end
+
   # Custom scope type 2. e.g. Portfolio.ruby_on_rails from controller returns this.
   scope :ruby_on_rails, -> { where(susbtitle: 'Ruby on Rails') }
 

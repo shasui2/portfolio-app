@@ -9,10 +9,7 @@ class PortfoliosController < ApplicationController
          site_admin: :all
 
   def index
-    @portfolio_items = Portfolio.all
-
-    # @portfolio_items = Portfolio.angular
-    # @portfolio_items = Portfolio.ruby_on_rails_portfolio_items
+    @portfolio_items = Portfolio.order_by_position
   end
 
   def angular
