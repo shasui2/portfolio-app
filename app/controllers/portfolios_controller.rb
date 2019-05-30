@@ -1,4 +1,6 @@
 class PortfoliosController < ApplicationController
+  skip_before_action :verify_authenticity_token, :only => :sort
+
   layout "portfolio"
   access all: [:show, :index, :angular],
          user: {except: [:destroy,
@@ -10,6 +12,14 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolio_items = Portfolio.order_by_position
+  end
+
+  def sort
+    params[:order].each do | key, value|
+      Portfolio.find(value[:id]).update(position: value[:position])
+    end
+
+    render body: nil
   end
 
   def angular
