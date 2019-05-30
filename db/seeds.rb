@@ -68,6 +68,6 @@ end
 
 puts "3 Technologies created."
 
-1.times do |user|
-  User.first.update!(roles: "site_admin")
-end
+# 1.times do |user|
+#   User.first.update!(roles: "site_admin")
+# end
