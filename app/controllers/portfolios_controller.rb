@@ -7,7 +7,8 @@ class PortfoliosController < ApplicationController
                          :new,
                          :create,
                          :update,
-                         :edit]},
+                         :edit,
+                         :sort]},
          site_admin: :all
 
   def index
@@ -15,7 +16,7 @@ class PortfoliosController < ApplicationController
   end
 
   def sort
-    params[:order].each do | key, value|
+    params[:order].each do |key, value|
       Portfolio.find(value[:id]).update(position: value[:position])
     end
 
@@ -28,7 +29,7 @@ class PortfoliosController < ApplicationController
 
   def new
     @portfolio_item = Portfolio.new
-    3.times { @portfolio_item.technologies.build }
+    3.times {@portfolio_item.technologies.build}
   end
 
   def create
@@ -36,9 +37,9 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio_item.save
-        format.html { redirect_to portfolios_path, notice: 'Your portfolio item is now live.' }
+        format.html {redirect_to portfolios_path, notice: 'Your portfolio item is now live.'}
       else
-        format.html { render :new }
+        format.html {render :new}
       end
     end
   end
@@ -52,9 +53,9 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio_item.update(portfolio_params)
-        format.html { redirect_to portfolios_path, notice: 'Portfolio item was successfully updated.' }
+        format.html {redirect_to portfolios_path, notice: 'Portfolio item was successfully updated.'}
       else
-        format.html { render :edit }
+        format.html {render :edit}
       end
     end
   end
@@ -68,11 +69,12 @@ class PortfoliosController < ApplicationController
 
     @portfolio_item.destroy
     respond_to do |format|
-      format.html { redirect_to portfolios_url, notice: 'Record was removed.' }
+      format.html {redirect_to portfolios_url, notice: 'Record was removed.'}
     end
   end
 
   private
+
   def portfolio_params
     params.require(:portfolio).permit(:title,
                                       :subtitle,
