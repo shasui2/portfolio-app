@@ -15,6 +15,11 @@ gem 'bootsnap', '>= 1.1.0'
 gem 'rspec'
 gem 'friendly_id', '~> 5.2.4'
 gem 'devise'
+gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'mini_magick', '~> 4.9', '>= 4.9.3'
+gem 'carrierwave-aws', '~> 1.3'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
