@@ -4,23 +4,29 @@
   <title><%= @page_title %></title>
   <%= csrf_meta_tags %>
   <meta name="keywords" content="<%= @seo_keywords %>"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <%= csp_meta_tag %>
   <%= favicon_link_tag asset_path('favicon-32x32.png') %>
 
-  <%= stylesheet_link_tag    'blogs', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'blogs', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
-<%= login_helper %>
+<%= render 'shared/blog_nav' %>
 
-<%= yield %>
-
-<%= render "shared/nav", location: 'bottom' %>
+<div class="container">
+  <div class="row">
+    <%= yield %>
+    <%= render 'blogs/side_bar' %>
+  </div>
+</div>
 
 <%= source_helper("blog") %>
+
+<%= render 'shared/blog_footer' %>
+
 </body>
 </html>

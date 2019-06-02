@@ -1,22 +1,9 @@
-<p id="notice"><%= notice %></p>
+<%= render 'blogs/featured_posts' %>
 
-<h1>Blogs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Body</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= render @blogs %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Blog', new_blog_path %>
+<div class="col-md-8 blog-main">
+  <h3 class="pb-4 mb-4 font-italic border-bottom">
+    From the Firehose
+  </h3>
+  <%= render @blogs %>
+  <%= paginate @blogs %>
+</div>
