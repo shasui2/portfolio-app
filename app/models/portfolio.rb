@@ -3,8 +3,10 @@ class Portfolio < ApplicationRecord
   accepts_nested_attributes_for :technologies,
                                 reject_if: lambda { |attrs| attrs['name'].blank? }
 
-  include Placeholder
-  validates_presence_of :title, :body, :main_image, :thumb_image
+  validates_presence_of :title, :body
+
+  mount_uploader :thumb_image, PortfolioUploader
+  mount_uploader :main_image, PortfolioUploader
 
   # Custom scope type 1. e.g. Portfolio.angular from controller returns this.
   def self.angular
@@ -17,11 +19,4 @@ class Portfolio < ApplicationRecord
 
   # Custom scope type 2. e.g. Portfolio.ruby_on_rails from controller returns this.
   scope :ruby_on_rails, -> { where(susbtitle: 'Ruby on Rails') }
-
-  after_initialize :set_defaults
-
-  def set_defaults
-    self.main_image ||= Placeholder.image_generator(height: '600', width: '400')
-    self.thumb_image ||= Placeholder.image_generator(height: '350', width: '200')
-  end
 end
