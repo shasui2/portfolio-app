@@ -4,7 +4,11 @@ ready = ->
       'Welcome to the danger zone.'
       'Enjoy your stay..'
     ]
-    typeSpeed: 50)
+    typeSpeed: 40
+    backSpeed: 20
+    backDelay: 500
+    startDelay: 1000
+    loop: false)
   return
 
 $(document).ready
