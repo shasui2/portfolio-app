@@ -21,10 +21,6 @@ gem 'carrierwave-aws', '~> 1.3'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.2'
 gem 'cocoon', '~> 1.2', '>= 1.2.9'
 
-group :production do
-  gem 'web-console', platforms: [:mri, :mingw, :x64_mingw]
-end
-
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
